@@ -81,7 +81,7 @@ const accordionData = [
   print(np.argmax(predicted_value[15], axis=0))`,
     files: [
       {
-        url: "public\code\DL_assign_2_mnist_img_offline.ipynb", // Relative path to the public folder
+        url: "/code/DL_assign_2_mnist_img_offline.ipynb", // Relative path to the public folder
         name: "DL_assign_2_mnist_img_offline.ipynb", // File name shown in the UI
       },
     ],
