@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useState } from "react";
 import { ClipboardIcon, DownloadIcon } from "@heroicons/react/solid"; // Ensure you're using the correct version of Heroicons
@@ -22,14 +22,11 @@ export default function Accordion({ data }) {
   };
 
   const handleDownload = (file) => {
-    // Local file path (relative to the 'public' directory)
-    const fileUrl = `/files/${file.url}`; // Adjusted for local files in the public folder
-    
     const link = document.createElement("a");
-    link.href = fileUrl; // URL for the file (local path)
-    link.download = file.name; // Suggested name for the file download
+    link.href = `/files/${file.name}`;  // Path relative to the public folder
+    link.download = file.name;  // Suggested name for the file download
 
-    // Append the link to the body, trigger a click event, then remove the link
+    // Trigger the download
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
