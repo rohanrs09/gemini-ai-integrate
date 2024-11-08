@@ -81,8 +81,8 @@ const accordionData = [
   print(np.argmax(predicted_value[15], axis=0))`,
     files: [
       {
-        url: "https://drive.google.com/file/d/1zxQLn01INv_nd71b5cPndsuXYh1Zmkvq/view?usp=drive_link", // Relative path to the public folder
-        name: "DL_assign_2_cifar10_img_offline.ipynb", // File name shown in the UI
+        url: "public\code\DL_assign_2_mnist_img_offline.ipynb", // Relative path to the public folder
+        name: "DL_assign_2_mnist_img_offline.ipynb", // File name shown in the UI
       },
     ],
   },
