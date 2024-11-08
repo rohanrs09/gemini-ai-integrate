@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ClipboardIcon } from "@heroicons/react/solid"; // Ensure you're using the correct version of Heroicons
+import { ClipboardIcon, DownloadIcon } from "@heroicons/react/solid"; // Ensure you're using the correct version of Heroicons
 
 export default function Accordion({ data }) {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -21,13 +21,21 @@ export default function Accordion({ data }) {
     }
   };
 
+  const handleDownload = (file) => {
+    const link = document.createElement("a");
+    link.href = file.url; // URL for the file
+    link.download = file.name; // Suggested name for the file download
+
+    // Append the link to the body, trigger a click event, then remove the link
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="max-w-md mx-auto mt-8 space-y-4">
       {data.map((item, index) => (
-        <div
-          key={index}
-          className="border border-gray-300 rounded-lg shadow-sm overflow-hidden"
-        >
+        <div key={index} className="border border-gray-300 rounded-lg shadow-sm overflow-hidden">
           <button
             onClick={() => toggleAccordion(index)}
             className={`w-full text-left px-4 py-3 font-semibold text-gray-800 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 ${
@@ -48,7 +56,27 @@ export default function Accordion({ data }) {
                   <ClipboardIcon className="w-5 h-5" />
                 </button>
               </pre>
-              {/* Show feedback message */}
+
+              {/* Display download buttons for files */}
+              <div className="mt-4">
+                {item.files && item.files.length > 0 ? (
+                  item.files.map((file, fileIndex) => (
+                    <div key={fileIndex} className="flex items-center space-x-2">
+                      <button
+                        onClick={() => handleDownload(file)}
+                        className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                      >
+                        <DownloadIcon className="w-5 h-5" />
+                        <span>Download {file.name}</span>
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p>No files available for download.</p>
+                )}
+              </div>
+
+              {/* Show feedback message when copied */}
               {copied && (
                 <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-sm rounded px-3 py-1">
                   Copied to clipboard!

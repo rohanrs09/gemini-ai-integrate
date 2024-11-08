@@ -1,7 +1,7 @@
 const accordionData = [
-    { 
-      title: "Assignment_2_MNIST - FNN", 
-      content: `# Import TensorFlow and relevant libraries
+  {
+    title: "Assignment_2_MNIST - FNN",
+    content: `# Import TensorFlow and relevant libraries
   import tensorflow as tf
   from tensorflow import keras
   from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -78,14 +78,19 @@ const accordionData = [
   predicted_value = model.predict(x_test)
   plt.imshow(x_test[15])
   plt.show()
-  print(np.argmax(predicted_value[15], axis=0))`
-    },
-    { title: "Accordion 2", content: "This is the content for Accordion 2." },
-    { title: "Accordion 3", content: "This is the content for Accordion 3." },
-    { title: "Accordion 4", content: "This is the content for Accordion 4." },
-    { title: "Accordion 5", content: "This is the content for Accordion 5." },
-    { title: "Accordion 6", content: "This is the content for Accordion 6." },
-  ];
-  
-  export default accordionData;
-  
+  print(np.argmax(predicted_value[15], axis=0))`,
+    files: [
+      {
+        url: "public/code/DL_assign_2_cifar10_img_offline.ipynb", // Relative path to the public folder
+        name: "DL_assign_2_cifar10_img_offline.ipynb", // File name shown in the UI
+      },
+    ],
+  },
+  { title: "Accordion 2", content: "This is the content for Accordion 2." },
+  { title: "Accordion 3", content: "This is the content for Accordion 3." },
+  { title: "Accordion 4", content: "This is the content for Accordion 4." },
+  { title: "Accordion 5", content: "This is the content for Accordion 5." },
+  { title: "Accordion 6", content: "This is the content for Accordion 6." },
+];
+
+export default accordionData;
