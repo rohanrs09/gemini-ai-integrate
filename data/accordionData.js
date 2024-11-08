@@ -1,84 +1,124 @@
 const accordionData = [
   {
     title: "Assignment_2_MNIST - FNN",
-    content: `# Import TensorFlow and relevant libraries
-  import tensorflow as tf
-  from tensorflow import keras
-  from tensorflow.keras.preprocessing.image import ImageDataGenerator
-  import matplotlib.pyplot as plt
-  import numpy as np
-  import seaborn as sns
-  
-  # Define the paths to the training and testing data directories
-  train_data_dir = 'mnist-jpg/train'
-  test_data_dir = 'mnist-jpg/test'
-  
-  # Set up an ImageDataGenerator to rescale pixel values to [0, 1]
-  image_data_generator = ImageDataGenerator(rescale=1.0/255)
-  
-  # Define batch sizes
-  train_batch_size = 10000
-  test_batch_size = 5000
-  
-  # Create data generators for training and testing
-  train_generator = image_data_generator.flow_from_directory(
-      train_data_dir,
-      target_size=(28, 28),  # Resize images to 28x28 pixels
-      batch_size=train_batch_size,  # Number of images per training batch
-      class_mode='categorical',  # One-hot encoded labels
-      color_mode='grayscale',  # Convert images to grayscale
-      shuffle=True,  # Shuffle the order of images during training
-  )
-  
-  test_generator = image_data_generator.flow_from_directory(
-      test_data_dir,
-      target_size=(28, 28),  # Resize images to 28x28 pixels
-      batch_size=test_batch_size,  # Number of images per testing batch
-      class_mode='categorical',  # One-hot encoded labels
-      color_mode='grayscale',  # Convert images to grayscale
-      shuffle=True,  # Shuffle the order of images during testing
-  )
-  
-  x_train, y_train = train_generator[0]
-  x_test, y_test = test_generator[0]
-  
-  print(f"Shape of X_train {x_train.shape}")
-  print(f"Shape of y_train {y_train.shape}")
-  print(f"Shape of x_test  {x_test.shape}")
-  print(f"Shape of y_test  {y_test.shape}")
-  
-  model = keras.Sequential([
-      keras.layers.Flatten(input_shape=(28,28)),
-      keras.layers.Dense(50,activation='relu',name='L1'),
-      keras.layers.Dense(50,activation='relu',name='L2'),
-      keras.layers.Dense(10,activation='softmax',name='L3')
-  ])
-  
-  model.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
-  history = model.fit(x_train, y_train, epochs=10, validation_data=(x_test, y_test), batch_size=10, shuffle=True)
-  
-  plt.plot(history.history['accuracy'])
-  plt.plot(history.history['val_accuracy'])
-  plt.title("Model Accuracy")
-  plt.ylabel('accuracy')
-  plt.xlabel('epoch')
-  plt.legend(['Train', "Validation"], loc='upper left')
-  
-  plt.plot(history.history['loss'])
-  plt.plot(history.history['val_loss'])
-  plt.title('Model Loss')
-  plt.ylabel('loss')
-  plt.xlabel('epoch')
-  plt.legend(['Train', 'Validation'], loc='upper left')
-  
-  test_loss, test_acc = model.evaluate(x_test, y_test)
-  print("Loss: ", test_loss)
-  print("Accuracy: ", test_acc)
-  
-  predicted_value = model.predict(x_test)
-  plt.imshow(x_test[15])
-  plt.show()
-  print(np.argmax(predicted_value[15], axis=0))`,
+    content: `import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import matplotlib.pyplot as plt
+import numpy as np
+
+***
+
+train_data_dir = 'Datasets/mnist-jpg/train'
+test_data_dir = 'Datasets/mnist-jpg/test'
+
+***
+
+# Image data generator for training data
+train_datagen = ImageDataGenerator(
+rescale=1.0/255
+)
+
+***
+
+# Image data generator for testing data
+test_datagen = ImageDataGenerator(
+rescale=1.0/255
+)
+
+***
+
+# Create data generators
+train_batch_size = 10000
+train_generator = train_datagen.flow_from_directory(
+    train_data_dir,
+    target_size=(28, 28),  # Resize images to 28x28
+    batch_size=train_batch_size,
+    class_mode='categorical', 
+     color_mode='grayscale',# Use 'categorical' for one-hot encoded labels
+    shuffle=True,
+)
+
+***
+
+# Load test data without labels (class_mode=None)
+test_batch_size = 2000
+test_generator = test_datagen.flow_from_directory(
+    test_data_dir,
+    target_size=(28, 28),  # Resize images to 28x28
+    batch_size=test_batch_size,
+    class_mode='categorical',  # Use 'categorical' for one-hot encoded labels
+     color_mode='grayscale',
+    shuffle=True,
+)
+
+****
+
+x_train, y_train = train_generator[0]
+x_test, y_test = test_generator[0]
+
+****
+
+model = keras.Sequential([
+    keras.layers.Flatten(input_shape=(28, 28, 1)),
+    keras.layers.Dense(128, activation="relu"),
+    keras.layers.Dense(10, activation="softmax")
+])
+
+****
+
+model.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
+history = model.fit(x_train, y_train, epochs=8, validation_data=(x_test, y_test))
+
+*****
+
+test_loss, test_acc = model.evaluate(x_test, y_test)
+print("Loss: ", test_loss)
+print("Accuracy: ", test_acc)
+
+***
+
+n = 20 
+plt.imshow(x_test[n])
+predicted_value = model.predict(x_test)
+print("Actual Number: ",np.argmax(y_test[n]))
+print("Predicted Number: ", np.argmax(predicted_value[n]))
+
+***
+
+history = history.history
+history.keys()
+
+***
+
+plt.plot(history['accuracy'])
+plt.plot(history['val_accuracy'])
+plt.title("Model Accuracy")
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['Train', "Validation"], loc='upper left')
+
+***
+
+plt.plot(history['loss'])
+plt.plot(history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['Train', 'Validation'], loc='upper left')
+
+***
+
+plt.plot(history['accuracy'])
+plt.plot(history['val_accuracy'])
+plt.plot(history['loss'])
+plt.plot(history['val_loss'])
+plt.title('Training Loss and accuracy')
+plt.ylabel('accuracy/Loss')
+plt.xlabel('epoch')
+plt.legend(['accuracy', 'val_accuracy','loss','val_loss'])
+
+`,
     files: [
       {
         url: "DL_assign_2_mnist_img_offline.ipynb", // Relative path to the public folder
