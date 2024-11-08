@@ -86,11 +86,56 @@ const accordionData = [
       },
     ],
   },
-  { title: "Accordion 2", content: "This is the content for Accordion 2." },
-  { title: "Accordion 3", content: "This is the content for Accordion 3." },
-  { title: "Accordion 4", content: "This is the content for Accordion 4." },
-  { title: "Accordion 5", content: "This is the content for Accordion 5." },
-  { title: "Accordion 6", content: "This is the content for Accordion 6." },
+  {
+    title: "Accordion 2",
+    content: "This is the content for Accordion 2.",
+    files: [
+      {
+        url: "https://drive.google.com/file/d/1zxQLn01INv_nd71b5cPndsuXYh1Zmkvq/view?usp=drive_link", // Relative path to the public folder
+        name: "DL_assign_2_cifar10_img_offline.ipynb", // File name shown in the UI
+      },
+    ],
+  },
+  {
+    title: "Accordion 3",
+    content: "This is the content for Accordion 3.",
+    files: [
+      {
+        url: "https://drive.google.com/file/d/1zxQLn01INv_nd71b5cPndsuXYh1Zmkvq/view?usp=drive_link", // Relative path to the public folder
+        name: "DL_assign_2_cifar10_img_offline.ipynb", // File name shown in the UI
+      },
+    ],
+  },
+  {
+    title: "Accordion 4",
+    content: "This is the content for Accordion 4.",
+    files: [
+      {
+        url: "https://drive.google.com/file/d/1zxQLn01INv_nd71b5cPndsuXYh1Zmkvq/view?usp=drive_link", // Relative path to the public folder
+        name: "DL_assign_2_cifar10_img_offline.ipynb", // File name shown in the UI
+      },
+    ],
+  },
+  {
+    title: "Accordion 5",
+    content: "This is the content for Accordion 5.",
+    files: [
+      {
+        url: "https://drive.google.com/file/d/1zxQLn01INv_nd71b5cPndsuXYh1Zmkvq/view?usp=drive_link", // Relative path to the public folder
+        name: "DL_assign_2_cifar10_img_offline.ipynb", // File name shown in the UI
+      },
+    ],
+  },
+  {
+    title: "Accordion 6",
+    content: "This is the content for Accordion 6.",
+    files: [
+      {
+        url: "https://drive.google.com/file/d/1zxQLn01INv_nd71b5cPndsuXYh1Zmkvq/view?usp=drive_link", // Relative path to the public folder
+        name: "DL_assign_2_cifar10_img_offline.ipynb", // File name shown in the UI
+      },
+    ],
+  },
 ];
 
 export default accordionData;
