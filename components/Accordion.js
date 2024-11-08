@@ -22,8 +22,11 @@ export default function Accordion({ data }) {
   };
 
   const handleDownload = (file) => {
+    // Local file path (relative to the 'public' directory)
+    const fileUrl = `/files/${file.url}`; // Adjusted for local files in the public folder
+    
     const link = document.createElement("a");
-    link.href = file.url; // URL for the file
+    link.href = fileUrl; // URL for the file (local path)
     link.download = file.name; // Suggested name for the file download
 
     // Append the link to the body, trigger a click event, then remove the link
